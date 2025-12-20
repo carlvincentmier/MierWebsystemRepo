@@ -1,0 +1,16 @@
+<?php
+$id = $_GET['id'];
+
+// MALI: id ay integer pero nilagyan ng quotes → hindi efficient at minsan maling index
+// $sql = "SELECT * FROM students WHERE id = '$id'";
+
+// TAMA: tanggalin ang quotes o i-cast sa integer para safe at efficient
+$id = (int) $_GET['id'];
+$sql = "SELECT * FROM students WHERE id = $id";
+
+/*
+pinalitan ko yung query para tanggalin ang quotes sa id, kasi integer value siya. 
+nag-cast rin ako sa integer gamit (int) para siguradong number ang id at mas efficient ang query. 
+kung may quotes, minsan nagiging string comparison, kaya minsan maling index ang nade-fetch.
+*/
+?>

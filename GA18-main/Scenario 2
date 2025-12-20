@@ -1,0 +1,23 @@
+<?php
+$conn = mysqli_connect("localhost","root","","class_db");
+
+// MALI: kulang sa quotes sa SQL, kaya akala ng database is column name yung value
+// $fname = $_POST['fname'];
+
+$fname = $_POST['fname']; // TAMA: sakto ang input
+
+// MALI: walang quotes si $fname kaya nag-e-error na "Unknown column 'Ana'"
+// $sql = "SELECT * FROM students WHERE first_name = $fname";
+
+// TAMA: single quotes para maging string sa SQL
+$sql = "SELECT * FROM students WHERE first_name = '$fname'";
+
+/*
+Inayos ko yung SQL query by adding single quotes sa $fname. 
+Kapag walang quotes, iniisip ng SQL na column name yung value, kaya nag-e-error. 
+Pero kapag naka 'value', alam ng SQL na string search siya. 
+Kaya ngayon tama na yung pag-search ng first_name base sa input ng user.
+*/
+
+$res = mysqli_query($conn, $sql);
+?>

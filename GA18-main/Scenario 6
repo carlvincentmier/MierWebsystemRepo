@@ -1,0 +1,22 @@
+<?php
+$conn = mysqli_connect("localhost","root","","class_db");
+
+// MALI: direktang ginamit ang $_GET['id'] sa query → prone sa SQL injection
+// $sql = "DELETE FROM students WHERE id = " . $_GET['id'];
+// mysqli_query($conn, $sql);
+
+// TAMA: option 1 — use intval() to force integer
+$id = intval($_GET['id']);
+
+// TAMA: option 2 — prepared statement (more secure)
+$stmt = $conn->prepare("DELETE FROM students WHERE id = ?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+
+/*
+ginamit ko ang intval() para siguraduhin na integer lang ang id, para di ma-inject ng user ang SQL. 
+gumamit rin ng prepared statement para mas safe. 
+dati, kung user mag-input ng 0 OR 1=1, ma-delete lahat ng rows. 
+ngayon, ang query safe na at id lang ang tatanggapin.
+*/
+?>

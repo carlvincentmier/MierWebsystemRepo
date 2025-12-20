@@ -1,0 +1,26 @@
+<?php
+$page = $_GET['page'];
+$limit = 5;
+
+// MALI: walang validation → user pwedeng mag-input ng sobrang large page number at ma-crash ang MySQL
+// $offset = $page * $limit;
+// $sql = "SELECT * FROM students LIMIT $offset, $limit";
+
+// TAMA: i-validate at i-restrict ang page number
+$page = (int) $page; // siguraduhin number
+if($page < 0) {
+    $page = 0; // minimum page 0
+} elseif($page > 1000) { // maximum page limit para di ma-crash ang server
+    $page = 1000;
+}
+
+$offset = $page * $limit;
+$sql = "SELECT * FROM students LIMIT $offset, $limit";
+$res = mysqli_query($conn, $sql);
+
+/*
+nag-add ako ng validation para sa page number. 
+gamit ang (int) cast at min/max limit, di na pwedeng mag-input ng sobrang large number na magc-crash sa MySQL. 
+ngayon, safe na ang pagination ng results.
+*/
+?>

@@ -1,0 +1,22 @@
+<?php
+$conn = mysqli_connect("localhost","root","","class_db");
+
+// MALI: Diretso sinasama sa SQL query, prone to SQL injection
+// $age = $_GET['age'];
+// $sql = "SELECT * FROM students WHERE age = $age";
+
+// TAMA: Gumamit ng prepared statement para safe against SQL injection
+$age = $_GET['age'];
+
+$stmt = $conn->prepare("SELECT * FROM students WHERE age = ?");
+$stmt->bind_param("i", $age); // "i" means integer
+$stmt->execute();
+
+$res = $stmt->get_result();
+
+/*
+Ginamit ko yung prepared statement para di basta-basta ma-inject ng user ang SQL. 
+kung nag-input ang user ng 1 OR 1=1, lahat ng records lalabas. 
+Ngayon, ang $age ay treated as integer lang, kaya safe na ang query.
+*/
+?>

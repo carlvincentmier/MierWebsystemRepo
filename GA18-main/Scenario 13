@@ -1,0 +1,18 @@
+<?php
+$newEmail = $_POST['email'];
+$id = $_POST['id'];
+
+// MALI: walang WHERE clause kaya nag-uupdate lahat ng rows
+// $sql = "UPDATE students SET email='$newEmail'";
+// mysqli_query($conn,$sql);
+
+// TAMA: idagdag ang WHERE clause para specific record lang ang ma-update
+$sql = "UPDATE students SET email='$newEmail' WHERE id=$id";
+$res = mysqli_query($conn,$sql);
+
+/*
+nag-add ako ng WHERE clause gamit ang id para specific student lang ang ma-update. 
+kung walang WHERE, lahat ng rows ng students table ay maaapektuhan, kaya nagiging malaking problema. 
+ngayon, safe at targeted update na ang query.
+*/
+?>

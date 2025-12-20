@@ -1,0 +1,29 @@
+<?php
+$conn = mysqli_connect("localhost","root","","class_db");
+
+$first = $_POST['fname'];
+$last = $_POST['lname'];
+
+// MALI: direktang insert kahit empty, kaya blank rows
+// $sql = "INSERT INTO students (first_name,last_name) VALUES ('$first','$last')";
+// mysqli_query($conn, $sql);
+
+// TAMA: check muna kung may laman ang input bago mag-insert
+if(!empty($first) && !empty($last)) {
+
+    // prepared statement para mas safe
+    $stmt = $conn->prepare("INSERT INTO students (first_name, last_name) VALUES (?, ?)");
+    $stmt->bind_param("ss", $first, $last); // "ss" = 2 strings
+    $stmt->execute();
+
+    echo "Inserted!";
+} else {
+    echo "Error: Please fill in all fields!";
+}
+
+/*
+Nag-add ako ng check para sure na hindi blank yung fname at lname bago mag-insert. 
+if walang laman ang input, hindi mag-iinsert at may error message. 
+tapos prepared statement para protektado sa SQL injection.
+*/
+?>

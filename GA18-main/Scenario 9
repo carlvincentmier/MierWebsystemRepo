@@ -1,0 +1,15 @@
+<?php
+// MALI: gamit ang $_POST kahit GET request ang link
+// $id = $_POST['id'];
+
+// TAMA: gamitin ang $_GET para kunin ang id mula sa URL
+$id = $_GET['id'];
+
+/*
+pinalitan ko yung $_POST → $_GET kasi ang link ay nagse-send ng data sa URL gamit ang ?id=3. 
+kung $_POST ang gagamitin, undefined index ang lalabas dahil walang POST data. 
+ngayon, tama na ang pagkuha ng student id.
+*/
+?>
+
+<a href="view.php?id=3">View Student</a>

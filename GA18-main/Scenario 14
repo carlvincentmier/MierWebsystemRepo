@@ -1,0 +1,22 @@
+<?php
+$data = $_POST;
+
+// MALI: diretso gamit ang $data sa query, walang quotes → undefined index o SQL error
+// $sql = "INSERT INTO students (first_name, last_name, email)
+// VALUES ($data[first_name], $data[last_name], $data[email])";
+
+// TAMA: ayusin ang indexing at lagyan ng quotes para string values
+$first = $data['first_name'];
+$last = $data['last_name'];
+$email = $data['email'];
+
+$sql = "INSERT INTO students (first_name, last_name, email)
+VALUES ('$first', '$last', '$email')";
+$res = mysqli_query($conn, $sql);
+
+/*
+ginamit ko ang tamang array indexing gamit quotes ['first_name'], ['last_name'], ['email'] at nilagyan ng single quotes sa SQL values. 
+kung walang quotes o maling indexing, undefined index o SQL error ang lalabas. 
+ngayon, tama na ang pag-insert ng multiple fields sa students table.
+*/
+?>

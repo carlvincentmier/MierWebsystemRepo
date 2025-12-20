@@ -1,0 +1,20 @@
+<?php
+$conn = mysqli_connect("localhost","root","","class_db");
+
+// MALI: walang loop kaya isa lang ang na-print
+// $res = mysqli_query($conn,"SELECT * FROM students");
+// $row = mysqli_fetch_assoc($res);
+// echo $row['email']; // prints first only
+
+// TAMA: gumamit ng while loop para ma-display lahat ng emails
+$res = mysqli_query($conn,"SELECT * FROM students");
+while($row = mysqli_fetch_assoc($res)) {
+    echo $row['email'] . "<br>";
+}
+
+/*
+dinagdag ko ang while loop para ma-fetch at ma-print lahat ng records ng students. 
+kung walang loop, isa lang ang nade-display kasi isang fetch lang ang nangyayari. 
+ngayon, bawat email ay lalabas sa browser.
+*/
+?>

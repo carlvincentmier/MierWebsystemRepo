@@ -1,0 +1,16 @@
+<?php
+// MALI: mali ang variable name kaya undefined variable error
+// $sql = "SELECT * FROM students WHERE age = $aeg";
+
+$age = $_POST['age'];
+
+// TAMA: gamitin ang tamang variable name sa SQL query
+$sql = "SELECT * FROM students WHERE age = $age";
+$res = mysqli_query($conn, $sql);
+
+/*
+pinalitan ko yung $aeg → $age kasi yun ang tamang variable na naglalaman ng input. 
+kung mali ang variable, undefined variable error ang lalabas. 
+ngayon, tama na ang query gamit ang posted age value.
+*/
+?>

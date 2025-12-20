@@ -1,0 +1,18 @@
+<?php
+$conn = mysqli_connect("localhost","root","","class_db");
+
+// MALI: typo sa input name, kaya undefined index error
+// $email = $_POST['emial']; 
+
+// TAMA: dapat "email"
+$email = $_POST['email'];
+
+$sql = "SELECT * FROM students WHERE email='$email'";
+$res = mysqli_query($conn, $sql);
+
+/*
+Pinalitan ko yung $_POST['emial'] to $_POST['email'] kasi yung input sa form ang pangalan ay "email". 
+pag typo ang input name, mag-uundefined index error kasi wala siyang natatanggap na value. 
+tapoa ngayon, tama na ang pagkuha ng email mula sa form.
+*/
+?>
